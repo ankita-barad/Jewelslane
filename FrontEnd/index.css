@@ -37,7 +37,8 @@ img {
   margin-left: 12px;
   margin-right: 12px;
 }
-.lower_nav_bar {
+.lower_nav_bar ul {
+  list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,7 @@ img {
   background-color: #f9f9fa;
   font-size: 14px;
 }
-.lower_nav_bar > div {
+.lower_nav_bar li {
   margin-left: 10px;
   margin-right: 10px;
 }
