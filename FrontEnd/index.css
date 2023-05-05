@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "MuliSemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 ul {
   margin: 0;
@@ -50,6 +51,28 @@ img {
   margin-left: 10px;
   margin-right: 10px;
 }
+.signIn_popup {
+  position: relative;
+  display: inline-block;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.signIn:hover .signIn_popup {
+  visibility: visible;
+  opacity: 1;
+}
 .signin_cart_container {
   display: flex;
 }
@@ -80,7 +103,12 @@ img {
 
 /* Style the search button */
 .search-container button {
-  background-color: #4f3267;
+  background: linear-gradient(
+      to right,
+      rgb(222, 87, 229) 0%,
+      rgb(136, 99, 251) 100%
+    )
+    0px 0px / auto;
   color: white;
   padding: 4px;
   border: none;
@@ -159,4 +187,11 @@ footer li {
 .social_logo {
   font-size: 32px;
   margin-right: 12px;
+  background: linear-gradient(
+      to right,
+      rgb(222, 87, 229) 0%,
+      rgb(136, 99, 251) 100%
+    )
+    0px 0px / auto;
+  color: rgb(246, 239, 246);
 }

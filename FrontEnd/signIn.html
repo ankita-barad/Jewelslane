@@ -8,9 +8,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-
     <link rel="stylesheet" href="./index.css" />
-    <title>Home</title>
+    <link rel="stylesheet" href="./signIn.css" />
+    <title>SignIn</title>
   </head>
   <body>
     <nav>
@@ -37,14 +37,6 @@
           <div class="signIn">
             <i class="fa-solid fa-user"></i>
           </div>
-          <div class="signIn_popup">
-            <h3>Your Account</h3>
-            <div>
-              <button class="signUp_btn">Sign Up</button>
-              <button class="signIn_btn">Log In</button>
-            </div>
-          </div>
-          <div class="signout_popup"></div>
           <div class="cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
@@ -64,39 +56,29 @@
         </ul>
       </div>
     </nav>
-    <div class="top_banner">
-      <img src="./images/Banner1.jpg" alt="" />
-    </div>
-    <div class="middle_banner">
-      <div>
-        <img src="./images/banner_category1.webp" alt="" />
-      </div>
-      <div>
-        <img src="./images/Banner_category2.webp" alt="" />
-      </div>
-      <div>
-        <img src="./images/Banner_category3.webp" alt="" />
-      </div>
-      <div>
-        <img src="./images/Banner_category4.webp" alt="" />
-      </div>
-      <div>
-        <img src="./images/Banner_category5.webp" alt="" />
-      </div>
-      <div>
-        <img src="./images/Banner_category6.webp" alt="" />
-      </div>
-    </div>
-    <div class="bottom_banner">
-      <div class="item_a">
-        <img src="./images/Banner_2.jpg" alt="" />
-      </div>
-      <div class="item_b">
-        <img src="./images/Banner3.webp" alt="" />
-      </div>
-      <div class="item_c">
-        <img src="./images/Banner4.jpg" alt="" />
-      </div>
+    <div class="signIn_container">
+      <h2 class="signIn_heading">Login with JewelsLane</h2>
+      <form id="signinform">
+        <label class="signInlabel" for="email">Email</label>
+        <input
+          class="sigIninput full_width"
+          type="email"
+          id="email"
+          name="email"
+          required
+        />
+
+        <label class="signInlabel" for="password">Password</label>
+        <input
+          class="sigIninput full_width"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+
+        <button class="sigIninput signInbutton" type="submit">Login</button>
+      </form>
     </div>
     <footer>
       <div class="footer_container">
@@ -166,5 +148,31 @@
     </footer>
   </body>
 </html>
+<script>
+  let form = document.getElementById("signinform");
 
-
+  const onSignin = (e) => {
+    e.preventDefault();
+    const userDetials = {
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
+    };
+    console.log(userDetials);
+    fetch("http://localhost:3300/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetials),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("user", res.user);
+        window.location.href = "./index.html";
+      })
+      .catch((err) => console.log(err));
+  };
+  form.addEventListener("submit", onSignin);
+</script>
