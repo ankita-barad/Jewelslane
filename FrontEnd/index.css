@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "MuliSemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 ul {
   margin: 0;
@@ -80,7 +81,12 @@ img {
 
 /* Style the search button */
 .search-container button {
-  background-color: #4f3267;
+  background: linear-gradient(
+      to right,
+      rgb(222, 87, 229) 0%,
+      rgb(136, 99, 251) 100%
+    )
+    0px 0px / auto;
   color: white;
   padding: 4px;
   border: none;
@@ -159,4 +165,11 @@ footer li {
 .social_logo {
   font-size: 32px;
   margin-right: 12px;
+  background: linear-gradient(
+      to right,
+      rgb(222, 87, 229) 0%,
+      rgb(136, 99, 251) 100%
+    )
+    0px 0px / auto;
+  color: rgb(246, 239, 246);
 }

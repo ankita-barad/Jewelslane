@@ -1,0 +1,74 @@
+.signUp_heading {
+  text-align: center;
+  font-family: BegumMedium, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 1;
+  font-size: 20px;
+}
+.signUp_container {
+  max-width: 20%;
+  margin: 0 auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.full_width {
+  max-width: 100%;
+}
+.half_width {
+  max-width: 50%;
+}
+.first_last {
+  display: flex;
+  flex-direction: column;
+}
+.sigUpinput {
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  padding: 0px 12px;
+  font-size: 16px;
+  color: rgb(35, 21, 53);
+  font-family: InterRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid rgb(173, 169, 173);
+  border-radius: 4px;
+}
+input:focus {
+  outline: none;
+  border: 1px solid rgb(173, 169, 173);
+  border-radius: 4px;
+}
+.first_last_name_container {
+  display: flex;
+}
+.signUplabel {
+  color: rgb(79, 50, 103);
+  font-family: InterSemiBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 8px 4px 16px 0px;
+  line-height: 18px;
+}
+.signUpbutton {
+  text-align: center;
+  background-image: linear-gradient(
+    to right,
+    rgb(222, 87, 229),
+    rgb(136, 99, 251)
+  );
+  border-radius: 12px;
+}
+.gender_container {
+  margin: 8px 0px 8px 0px;
+}
+#first_name {
+  margin-right: 4px;
+}
+#last_name {
+  margin-left: 4px;
+}
+.login {
+  color: rgb(35, 21, 53);
+  font-size: 12px;
+  text-align: center;
+  font-family: InterRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 16px 0px;
+}
