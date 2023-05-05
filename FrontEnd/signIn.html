@@ -1,13 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./signIn.css" />
     <title>SignIn</title>
-</head>
-<body>
-    
-    
-</body>
+  </head>
+  <body>
+    <nav>
+      <div class="top_nav"></div>
+      <div class="upper_nav_bar">
+        <div class="logo">
+          <img src="./images/logo.png" alt="" />
+        </div>
+        <div class="services">
+          <div>FREE TRY AT HOME</div>
+          <div>FIND STORE</div>
+          <div>PLAN OF PURCHASE</div>
+          <div>BUY DIGITAL GOLD</div>
+        </div>
+        <div class="search-container">
+          <input type="text" name="search" id="search" placeholder="search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="pincode">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>PINCODE</div>
+        </div>
+        <div class="signin_cart_container">
+          <div class="signIn">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        </div>
+      </div>
+      <div class="lower_nav_bar">
+        <ul>
+          <li>BEST SELLERS</li>
+          <li>NEW ARRIVALS</li>
+          <li>RINGS</li>
+          <li>EARRINGS</li>
+          <li>BRACELETS & BANGLES</li>
+          <li>SOLITAIRES</li>
+          <li>SPECIAL DEALS</li>
+          <li>OTHER JEWELLERY</li>
+          <li>GIFTING</li>
+        </ul>
+      </div>
+    </nav>
+    <div class="signIn_container">
+      <h2 class="signIn_heading">Login with JewelsLane</h2>
+      <form id="signinform">
+        <label class="signInlabel" for="email">Email</label>
+        <input
+          class="sigIninput full_width"
+          type="email"
+          id="email"
+          name="email"
+          required
+        />
+
+        <label class="signInlabel" for="password">Password</label>
+        <input
+          class="sigIninput full_width"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+
+        <button class="sigIninput signInbutton" type="submit">Login</button>
+      </form>
+    </div>
+    <footer>
+      <div class="footer_container">
+        <div class="footer_row1">
+          <div>
+            <ul>
+              <li class="heading">Know Your Jewellery</li>
+              <li>DIAMOND GUIDE</li>
+              <li>JEWELLERY GUIDE</li>
+              <li>GEMSTONES GUIDE</li>
+              <li>Gold Rate</li>
+              <li>Digital Gold</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li class="heading">CaratLane Advantage</li>
+              <li>15-DAY RETURNS</li>
+              <li>FREE SHIPPING</li>
+              <li>FINANCING OPTIONS</li>
+              <li>Old Gold Exchange</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Customer Service</li>
+              <li>RETURN POLICY</li>
+              <li>ORDER STATUS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">About Us</li>
+              <li>OUR STORY</li>
+              <li>PRESS</li>
+              <li>BLOG</li>
+              <li>CAREERS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Contact Us</li>
+              <li>
+                <ul class="communication_Icons">
+                  <li><i class="fa-solid fa-phone"></i></li>
+                  <li><i class="fa-solid fa-message"></i></li>
+                  <li><i class="fa-brands fa-square-whatsapp"></i></li>
+                </ul>
+              </li>
+              <li>24X7 Enquiry Support ( ALL Days )</li>
+              <li>General: Contactus@Caratlane.Com</li>
+              <li>Coraporate: B2B@Caratlane.Com</li>
+              <li>HR: Careers@Caratlane.Com</li>
+              <li>Grievance: Click Here</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          <i class="fa-brands fa-square-facebook social_logo"></i>
+          <i class="fa-brands fa-square-instagram social_logo"></i>
+          <i class="fa-brands fa-square-pinterest social_logo"></i>
+          <i class="fa-brands fa-square-twitter social_logo"></i>
+          <i class="fa-brands fa-linkedin social_logo"></i>
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>
+<script>
+  let form = document.getElementById("signinform");
+
+  const onSignin = (e) => {
+    e.preventDefault();
+    const userDetials = {
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
+    };
+    console.log(userDetials);
+    fetch("http://localhost:3300/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetials),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("user", res.user);
+        window.location.href = "./index.html";
+      })
+      .catch((err) => console.log(err));
+  };
+  form.addEventListener("submit", onSignin);
+</script>

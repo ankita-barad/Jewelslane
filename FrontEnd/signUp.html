@@ -58,7 +58,7 @@
     </nav>
     <div class="signUp_container">
       <h2 class="signUp_heading">SignUp with JewelsLane</h2>
-      <form>
+      <form id="signUpform">
         <label class="signUplabel" for="mobile_number">Mobile Number</label>
         <input
           class="sigUpinput full_width"
@@ -220,3 +220,53 @@
     </footer>
   </body>
 </html>
+<script>
+  let form = document.getElementById("signUpform");
+
+  const onSignUp = (e) => {
+    e.preventDefault();
+
+    let firstName = document.getElementById("first_name").value;
+    let lastName = document.getElementById("last_name").value;
+    let mobileNumber = document.getElementById("mobile_number").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmpassword").value;
+    let gender = document.querySelector(
+      "input[type=radio][name=gender]:checked"
+    ).value;
+
+    if (confirmPassword === password) {
+      let userDetails = {
+        firstName,
+        lastName,
+        mobileNumber,
+        email,
+        password,
+        gender,
+      };
+      console.log(userDetails);
+
+      fetch("http://localhost:3300/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userDetails),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res) {
+            console.log(res);
+            window.location.href = "./signIn.html";
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("Password not match");
+      window.location.href = "./signUp.html";
+    }
+  };
+
+  form.addEventListener("submit", onSignUp);
+</script>
