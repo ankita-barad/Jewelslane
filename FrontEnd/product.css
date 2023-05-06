@@ -1,0 +1,165 @@
+:root {
+  --form-control-color: #4f3267;
+  --form-control-disabled: #959495;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  width: 100%;
+}
+.container {
+  width: 68%;
+  margin: auto;
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+#products_conatiner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+.filters_container {
+  margin-right: 24px;
+  box-shadow: rgba(215, 206, 206, 0.5) 0px 5px 11px 0px;
+  border-radius: 24px 24px 0px 0px;
+  width: 20%;
+  border-color: #fff;
+}
+.filter_heading {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  height: 57px;
+  line-height: 57px;
+  border-radius: 24px 24px 0px 0px;
+  background-color: rgb(246, 243, 249);
+  color: rgb(79, 50, 103);
+  font-family: MuliBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.12px;
+}
+.filter_item_title {
+  color: rgb(79, 50, 103);
+  font-family: MuliBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.15px;
+  margin-bottom: 18px;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #bcbcbc;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.product_price {
+  font-size: 20px;
+  font-family: "InterBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #4f3267;
+  font-weight: bold;
+}
+.product_name {
+  font-family: "InterRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #9d9fa4;
+}
+.product_image {
+  border-radius: 8px;
+  border: 1px solid lightgray;
+}
+
+.filter_item_container {
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"]::before {
+  /* ...existing styles */
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+form {
+  display: grid;
+  place-content: center;
+  min-height: 40px;
+}
+
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+}
+
+.form-control + .form-control {
+  margin-top: 1em;
+}
+
+.form-control--disabled {
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  margin-right: 8px;
+  width: 1.15em;
+  height: 1.15em;
+  border: 1px solid #8863fb;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+/* input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+} */
+
+input[type="checkbox"]:disabled {
+  --form-control-color: var(--form-control-disabled);
+
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}
+.filter_item {
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 20px;
+}

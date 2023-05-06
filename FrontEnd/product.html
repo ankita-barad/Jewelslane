@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./product.css" />
+    <title>Product</title>
+  </head>
+  <body>
+    <nav>
+      <div class="top_nav"></div>
+      <div class="upper_nav_bar">
+        <div class="logo">
+          <img src="./images/logo.png" alt="" />
+        </div>
+        <div class="services">
+          <div>FREE TRY AT HOME</div>
+          <div>FIND STORE</div>
+          <div>PLAN OF PURCHASE</div>
+          <div>BUY DIGITAL GOLD</div>
+        </div>
+        <div class="search-container">
+          <input type="text" name="search" id="search" placeholder="search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="pincode">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>PINCODE</div>
+        </div>
+        <div class="signin_cart_container">
+          <div class="signIn">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="signIn_popup">
+            <h3>Your Account</h3>
+            <div>
+              <button class="signUp_btn">Sign Up</button>
+              <button class="signIn_btn">Log In</button>
+            </div>
+          </div>
+          <div class="signout_popup"></div>
+          <div class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        </div>
+      </div>
+      <div class="lower_nav_bar">
+        <ul>
+          <li>BEST SELLERS</li>
+          <li>NEW ARRIVALS</li>
+          <li>RINGS</li>
+          <li>EARRINGS</li>
+          <li>BRACELETS & BANGLES</li>
+          <li>SOLITAIRES</li>
+          <li>SPECIAL DEALS</li>
+          <li>OTHER JEWELLERY</li>
+          <li>GIFTING</li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="filters_container">
+        <div>
+          <h3 class="filter_heading">Filter By</h3>
+        </div>
+        <form>
+          <div id="materials" class="filter_item"></div>
+          <div id="metals" class="filter_item"></div>
+          <div id="sizes" class="filter_item"></div>
+        </form>
+      </div>
+      <div id="products_conatiner"></div>
+    </div>
+    <footer>
+      <div class="footer_container">
+        <div class="footer_row1">
+          <div>
+            <ul>
+              <li class="heading">Know Your Jewellery</li>
+              <li>DIAMOND GUIDE</li>
+              <li>JEWELLERY GUIDE</li>
+              <li>GEMSTONES GUIDE</li>
+              <li>Gold Rate</li>
+              <li>Digital Gold</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li class="heading">CaratLane Advantage</li>
+              <li>15-DAY RETURNS</li>
+              <li>FREE SHIPPING</li>
+              <li>FINANCING OPTIONS</li>
+              <li>Old Gold Exchange</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Customer Service</li>
+              <li>RETURN POLICY</li>
+              <li>ORDER STATUS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">About Us</li>
+              <li>OUR STORY</li>
+              <li>PRESS</li>
+              <li>BLOG</li>
+              <li>CAREERS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Contact Us</li>
+              <li>
+                <ul class="communication_Icons">
+                  <li><i class="fa-solid fa-phone"></i></li>
+                  <li><i class="fa-solid fa-message"></i></li>
+                  <li><i class="fa-brands fa-square-whatsapp"></i></li>
+                </ul>
+              </li>
+              <li>24X7 Enquiry Support ( ALL Days )</li>
+              <li>General: Contactus@Caratlane.Com</li>
+              <li>Coraporate: B2B@Caratlane.Com</li>
+              <li>HR: Careers@Caratlane.Com</li>
+              <li>Grievance: Click Here</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          <i class="fa-brands fa-square-facebook social_logo"></i>
+          <i class="fa-brands fa-square-instagram social_logo"></i>
+          <i class="fa-brands fa-square-pinterest social_logo"></i>
+          <i class="fa-brands fa-square-twitter social_logo"></i>
+          <i class="fa-brands fa-linkedin social_logo"></i>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+  window.onload = () => {
+    fetch("http://localhost:3300/product/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          console.log(res.products);
+          displayProduct(res.products);
+        }
+      })
+      .catch((err) => console.log(err));
+
+    displayFilters();
+  };
+
+  let product_container = document.getElementById("products_conatiner");
+  function displayProduct(data) {
+    product_container.innerHTML = "";
+    data.forEach((el) => {
+      let card = document.createElement("div");
+      card.setAttribute("class", "card");
+
+      let image = document.createElement("img");
+      image.setAttribute("src", el.image);
+      image.setAttribute("class", "product_image");
+
+      let price = document.createElement("p");
+      price.textContent = `₹${el.price}`;
+      price.setAttribute("class", "product_price");
+
+      let name = document.createElement("h3");
+      name.textContent = el.name;
+      name.setAttribute("class", "product_name");
+
+      card.append(image, price, name);
+      product_container.append(card);
+    });
+  }
+
+  const ALL_FILTERS = {
+    materials: [
+      {
+        id: "Gold",
+        label: "Gold",
+      },
+      {
+        id: "Platinum",
+        label: "Platinum",
+      },
+      {
+        id: "Solitaire",
+        label: "Solitaire",
+      },
+    ],
+    metals: [
+      {
+        id: "14KT",
+        label: "14KT",
+      },
+      {
+        id: "18KT",
+        label: "18KT",
+      },
+      {
+        id: "19KT",
+        label: "19KT",
+      },
+    ],
+    sizes: [
+      {
+        id: 5,
+        label: 5,
+      },
+      {
+        id: 6,
+        label: 6,
+      },
+      {
+        id: 7,
+        label: 7,
+      },
+      {
+        id: 8,
+        label: 8,
+      },
+      {
+        id: 9,
+        label: 9,
+      },
+      {
+        id: 10,
+        label: 10,
+      },
+      {
+        id: 11,
+        label: 11,
+      },
+      {
+        id: 12,
+        label: 12,
+      },
+    ],
+  };
+
+  function displayFilters() {
+    const filterFormEl = document.createElement("form");
+
+    const materialsEl = document.getElementById("materials");
+    const metalsEl = document.getElementById("metals");
+    const sizesEl = document.getElementById("sizes");
+
+    buildFilter(materialsEl, ALL_FILTERS.materials, [], "Materials");
+    buildFilter(metalsEl, ALL_FILTERS.metals, [], "Metals");
+    buildFilter(sizesEl, ALL_FILTERS.sizes, [], "Sizes");
+  }
+
+  function buildFilter(el, items, selectedItems, title) {
+    const titelEl = document.createElement("h3");
+    titelEl.setAttribute("class", "filter_item_title");
+    titelEl.textContent = title;
+    el.append(titelEl);
+    items.forEach((item) => {
+      const filterItemContainer = document.createElement("div");
+      filterItemContainer.classList.add("filter_item_container");
+
+      const filterInput = document.createElement("input");
+      const filterLabel = document.createElement("label");
+      filterInput.type = "checkbox";
+      filterInput.id = item.id;
+      filterInput.checked = selectedItems.includes(item.id);
+
+      filterInput.addEventListener("change", (e) => {
+        console.log(e.target.checked, e.target.id);
+      });
+
+      filterLabel.setAttribute("for", item.id);
+      filterLabel.textContent = item.label;
+
+      filterLabel.classList.add("form-control");
+
+      filterItemContainer.append(filterInput, filterLabel);
+      el.append(filterItemContainer);
+    });
+  }
+</script>
