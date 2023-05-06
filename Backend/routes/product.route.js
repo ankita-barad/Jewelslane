@@ -11,4 +11,15 @@ productRoute.post("/create", async (req, res) => {
   }
 });
 
+productRoute.get("/", async (req, res) => {
+  try {
+    let products = await ProductModel.find();
+    res
+      .status(200)
+      .send(JSON.stringify({ products, filters: {}, total: products.length }));
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = { productRoute };
