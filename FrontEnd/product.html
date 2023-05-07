@@ -17,7 +17,7 @@
       <div class="top_nav"></div>
       <div class="upper_nav_bar">
         <div class="logo">
-          <img src="./images/logo.png" alt="" />
+          <img src="/logo.png" alt="" />
         </div>
         <div class="services">
           <div>FREE TRY AT HOME</div>
@@ -175,6 +175,12 @@
       let image = document.createElement("img");
       image.setAttribute("src", el.image);
       image.setAttribute("class", "product_image");
+      image.setAttribute("data-set", el._id);
+
+      image.addEventListener("click", (e) => {
+        console.log(e.target.dataset.set);
+        window.location.href = `/productDetails.html?productId=${e.target.dataset.set}`;
+      });
 
       let price = document.createElement("p");
       price.textContent = `₹${el.price}`;
