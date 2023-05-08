@@ -195,3 +195,9 @@ footer li {
     0px 0px / auto;
   color: rgb(246, 239, 246);
 }
+.logout button {
+  background-color: white;
+  border: 1px solid #4f3267;
+  color: #4f3267;
+  border-radius: 4px;
+}

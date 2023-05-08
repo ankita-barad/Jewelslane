@@ -37,16 +37,12 @@
           <div class="signIn">
             <i class="fa-solid fa-user"></i>
           </div>
-          <div class="signIn_popup">
-            <h3>Your Account</h3>
-            <div>
-              <button class="signUp_btn">Sign Up</button>
-              <button class="signIn_btn">Log In</button>
-            </div>
-          </div>
           <div class="signout_popup"></div>
           <div class="cart">
             <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <div class="logout">
+            <button class="logoutBtn">LOGOUT</button>
           </div>
         </div>
       </div>
@@ -54,8 +50,8 @@
         <ul>
           <li>BEST SELLERS</li>
           <li>NEW ARRIVALS</li>
-          <li>RINGS</li>
-          <li>EARRINGS</li>
+          <li class="rings">RINGS</li>
+          <li class="earrings">EARRINGS</li>
           <li>BRACELETS & BANGLES</li>
           <li>SOLITAIRES</li>
           <li>SPECIAL DEALS</li>
@@ -166,3 +162,25 @@
     </footer>
   </body>
 </html>
+<script>
+  let signIn = document.querySelector(".signIn");
+  signIn.addEventListener("click", () => {
+    window.location.href = "./signUp.html";
+  });
+
+  let rings = document.querySelector(".rings");
+  rings.addEventListener("click", () => {
+    window.location.href = "./product.html";
+  });
+
+  let logoutBtn = document.querySelector(".logoutBtn");
+  logoutBtn.addEventListener("click", () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      localStorage.clear();
+      window.location.href = "./index.html";
+    } else {
+      window.location.href = "./index.html";
+    }
+  });
+</script>

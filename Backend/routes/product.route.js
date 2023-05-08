@@ -13,7 +13,38 @@ productRoute.post("/create", async (req, res) => {
 
 productRoute.get("/", async (req, res) => {
   try {
-    let products = await ProductModel.find();
+    const { Materials, Metals, Sizes } = req.query;
+
+    const dbQuery = {
+      ...(Materials
+        ? {
+            material: {
+              $in: Materials?.split(","),
+            },
+          }
+        : {}),
+      ...(Metals
+        ? {
+            metal: {
+              $in: Metals?.split(","),
+            },
+          }
+        : {}),
+      ...(Sizes
+        ? {
+            size: {
+              $in: Sizes.split(","),
+            },
+          }
+        : {}),
+    };
+
+    console.log(dbQuery);
+
+    let products = await ProductModel.find(dbQuery, null, {
+      sort: "price",
+    });
+
     res
       .status(200)
       .send(JSON.stringify({ products, filters: {}, total: products.length }));

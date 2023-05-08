@@ -147,7 +147,15 @@
 </html>
 <script>
   window.onload = () => {
-    fetch("http://localhost:3300/product/", {
+    fetchData();
+    displayFilters();
+  };
+
+  const appliedFilters = {};
+
+  function fetchData() {
+    const filters = new URLSearchParams(appliedFilters);
+    fetch(`http://localhost:3300/product/${filters ? `?${filters}` : ""}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -161,9 +169,7 @@
         }
       })
       .catch((err) => console.log(err));
-
-    displayFilters();
-  };
+  }
 
   let product_container = document.getElementById("products_conatiner");
   function displayProduct(data) {
@@ -190,7 +196,11 @@
       name.textContent = el.name;
       name.setAttribute("class", "product_name");
 
-      card.append(image, price, name);
+      let material = document.createElement("h3");
+      material.textContent = el.material;
+      material.setAttribute("class", "material");
+
+      card.append(image, price, name, material);
       product_container.append(card);
     });
   }
@@ -285,10 +295,28 @@
       const filterLabel = document.createElement("label");
       filterInput.type = "checkbox";
       filterInput.id = item.id;
+      filterInput.setAttribute("data-title", title);
       filterInput.checked = selectedItems.includes(item.id);
 
       filterInput.addEventListener("change", (e) => {
-        console.log(e.target.checked, e.target.id);
+        console.log(e.target.checked, e.target.id, e.target.dataset.title);
+        if (e.target.checked) {
+          if (appliedFilters[title]) {
+            appliedFilters[title] = appliedFilters[title]
+              .split(",")
+              .concat(e.target.id)
+              .join(",");
+          } else {
+            appliedFilters[title] = e.target.id;
+          }
+        } else {
+          appliedFilters[title] = appliedFilters[title]
+            .split(",")
+            .filter((i) => i !== e.target.id)
+            .join(",");
+        }
+
+        fetchData();
       });
 
       filterLabel.setAttribute("for", item.id);

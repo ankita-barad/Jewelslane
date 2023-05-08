@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./cart.css" />
+    <title>cart</title>
+  </head>
+  <body>
+    <nav>
+      <div class="top_nav"></div>
+      <div class="upper_nav_bar">
+        <div class="logo">
+          <img src="/logo.png" alt="" />
+        </div>
+        <div class="cart_heading">
+          <p>Shopping Cart</p>
+        </div>
+      </div>
+    </nav>
+    <div id="cart_container"></div>
+    <div class="checkout_total_container">
+      <button class="checkout">Checkout</button>
+      <p id="total_amount"></p>
+    </div>
+    <footer class="footer_cart">
+      <div class="contact_info">
+        <p>
+          <span>Contact Us:</span>+91-44-42935000 (Helpline) |
+          contactus@caratlane.com
+        </p>
+      </div>
+      <div class="payment_logos">
+        <i class="fa-brands fa-cc-visa"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-brands fa-cc-paypal"></i>
+        <i class="fa-brands fa-cc-amex"></i>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+  let cart_container = document.getElementById("cart_container");
+
+  window.onload = () => {
+    fetchData();
+  };
+
+  function updateQuantity(cartId, quantity, productId) {
+    fetch(`http://localhost:3300/cart/${cartId}/quantity`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        quantity,
+        productId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        displayData(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function fetchData() {
+    fetch(`http://localhost:3300/cart/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        displayData(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function displayData(data) {
+    cart_container.innerHTML = "";
+
+    const total = data.products.reduce((res, p) => {
+      res = res + p.product.price * p.quantity;
+      return res;
+    }, 0);
+
+    const totalEl = document.getElementById("total_amount");
+    totalEl.textContent = `Total: ₹${total}`;
+
+    console.log(data);
+    data.products.forEach((el) => {
+      console.log(el.product.image);
+      let image_product_details_conatiner = document.createElement("div");
+      image_product_details_conatiner.setAttribute(
+        "class",
+        "image_product_details_conatiner"
+      );
+
+      let image_container = document.createElement("div");
+      image_container.setAttribute("class", "image_container");
+
+      let image = document.createElement("img");
+      image.setAttribute("src", el.product.image);
+      image.setAttribute("class", "image");
+
+      let product_detail_container = document.createElement("div");
+      product_detail_container.setAttribute(
+        "class",
+        "product_detail_container"
+      );
+
+      let name = document.createElement("p");
+      name.textContent = el.product.name;
+      name.setAttribute("class", "name");
+
+      let price = document.createElement("price");
+      price.textContent = `₹${el.product.price}`;
+      price.setAttribute("class", "price");
+
+      let select_heading_quantiy = document.createElement("div");
+      select_heading_quantiy.setAttribute("class", "select_heading_quantiy");
+
+      let select_heading = document.createElement("p");
+      select_heading.textContent = "Quantity";
+
+      let quantitySelect = document.createElement("select");
+      console.log(el.quantity);
+
+      for (let i = 1; i <= 5; i++) {
+        const option = document.createElement("option");
+
+        option.text = i;
+        option.value = i;
+        quantitySelect.appendChild(option);
+      }
+
+      quantitySelect.value = el.quantity;
+
+      quantitySelect.addEventListener("change", (e) => {
+        console.log(e.target.value);
+        console.log(
+          "cartId",
+          data._id,
+          "new Quantity ",
+          e.target.value,
+          "productId",
+          el.product._id
+        );
+        updateQuantity(data._id, e.target.value, el.product._id);
+      });
+
+      select_heading_quantiy.append(select_heading, quantitySelect);
+      image_container.append(image);
+      product_detail_container.append(name, price, select_heading_quantiy);
+      image_product_details_conatiner.append(
+        image_container,
+        product_detail_container
+      );
+      cart_container.append(image_product_details_conatiner);
+    });
+  }
+
+  let checkout = document.querySelector(".checkout");
+  checkout.addEventListener("click", () => {
+    window.location.href = "./payment.html";
+  });
+</script>

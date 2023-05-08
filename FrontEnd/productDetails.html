@@ -140,6 +140,26 @@
     })
     .catch((err) => console.log(err));
 
+  function addToCartAction(productId) {
+    fetch(`http://localhost:3300/cart/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        productId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          console.log(res.products);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   let product_container = document.getElementById("product_details_container");
   function displayProduct(el) {
     product_container.innerHTML = "";
@@ -208,6 +228,18 @@
     let addToCart = document.createElement("button");
     addToCart.textContent = "ADD TO CART";
     addToCart.setAttribute("class", "cartBtn");
+    addToCart.setAttribute("data-set", el._id);
+
+    addToCart.addEventListener("click", (e) => {
+      console.log(e.target.dataset.set);
+      const token = localStorage.getItem("token");
+      if (token) {
+        addToCartAction(e.target.dataset.set);
+        alert("Product added to cart");
+      } else {
+        window.location.href = "./signUp.html";
+      }
+    });
 
     product_details.append(name, select_container, price, addToCart);
     select_container.append(
@@ -219,4 +251,9 @@
     product_image.append(image);
     product_container.append(product_image, product_details);
   }
+
+  let cart = document.querySelector(".cart");
+  cart.addEventListener("click", () => {
+    window.location.href = "./cart.html";
+  });
 </script>
