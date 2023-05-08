@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
     try {
       const decoded = jwt.verify(token.split(" ")[1], "masai");
       if (decoded) {
-        req.body.userId = decoded.userId;
+        req.userId = decoded.userId;
         next();
       } else {
         res.send({ msg: "please login" });

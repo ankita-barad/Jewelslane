@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./signUp.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./payment.css" />
+    <title>Checkout</title>
+  </head>
+  <body>
+    <nav>
+      <div class="top_nav"></div>
+      <div class="upper_nav_bar">
+        <div class="logo">
+          <img src="/logo.png" alt="" />
+        </div>
+      </div>
+    </nav>
+    <div class="signUp_container">
+      <h2 class="signUp_heading">Shipping Address</h2>
+      <form id="signUpform">
+        <label class="signUplabel" for="mobile_number">Mobile Number</label>
+        <input
+          class="sigUpinput full_width"
+          type="number"
+          id="mobile_number"
+          name="mobile_number"
+          required
+        />
+        <div class="first_last_name_container full_width">
+          <div class="first_last half_width">
+            <label class="signUplabel" for="first_name">First Name</label>
+            <input
+              class="sigUpinput"
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+            />
+          </div>
+
+          <div class="first_last half_width">
+            <label class="signUplabel" for="last_name">Last Name</label>
+            <input
+              class="sigUpinput"
+              type="text"
+              id="last_name"
+              name="last_name"
+              required
+            />
+          </div>
+        </div>
+
+        <label class="signUplabel" for="email">Email</label>
+        <input
+          class="sigUpinput full_width"
+          type="email"
+          id="email"
+          name="email"
+          required
+        />
+
+        <label class="signUplabel" for="password"
+          >Street and House Number</label
+        >
+        <input
+          class="sigUpinput full_width"
+          type="text"
+          id="password"
+          name="password"
+          required
+        />
+
+        <label class="signUplabel" for="confirmpassword">Additional Info</label>
+        <input
+          class="sigUpinput full_width"
+          type="text"
+          id="confirmpassword"
+          name="confirmpassword"
+          required
+        />
+
+        <div class="gender_container">
+          <label class="signUplabel">Delivery detail</label>
+          <input type="radio" id="male" name="gender" value="Male" required />
+          <label class="signUplabel" for="male">Home Delivery</label>
+
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="Female"
+            required
+          />
+          <label class="signUplabel" for="female">In-store pick up</label>
+        </div>
+
+        <div class="first_last_name_container full_width cardNumberandCvv">
+          <div class="first_last half_width">
+            <label class="signUplabel cardNumber" for="first_name"
+              >Card Number</label
+            >
+            <input
+              class="sigUpinput"
+              type="number"
+              id="cardNumber"
+              name="first_name"
+              required
+            />
+          </div>
+
+          <div class="first_last half_width">
+            <label class="signUplabel" for="last_name">CVV</label>
+            <input
+              class="sigUpinput"
+              type="number"
+              id="cvv"
+              name="last_name"
+              required
+            />
+          </div>
+        </div>
+
+        <button class="sigUpinput signUpbutton" type="submit">Pay</button>
+      </form>
+    </div>
+    <footer>
+      <div class="footer_container">
+        <div class="footer_row1">
+          <div>
+            <ul>
+              <li class="heading">Know Your Jewellery</li>
+              <li>DIAMOND GUIDE</li>
+              <li>JEWELLERY GUIDE</li>
+              <li>GEMSTONES GUIDE</li>
+              <li>Gold Rate</li>
+              <li>Digital Gold</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li class="heading">CaratLane Advantage</li>
+              <li>15-DAY RETURNS</li>
+              <li>FREE SHIPPING</li>
+              <li>FINANCING OPTIONS</li>
+              <li>Old Gold Exchange</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Customer Service</li>
+              <li>RETURN POLICY</li>
+              <li>ORDER STATUS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">About Us</li>
+              <li>OUR STORY</li>
+              <li>PRESS</li>
+              <li>BLOG</li>
+              <li>CAREERS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Contact Us</li>
+              <li>
+                <ul class="communication_Icons">
+                  <li><i class="fa-solid fa-phone"></i></li>
+                  <li><i class="fa-solid fa-message"></i></li>
+                  <li><i class="fa-brands fa-square-whatsapp"></i></li>
+                </ul>
+              </li>
+              <li>24X7 Enquiry Support ( ALL Days )</li>
+              <li>General: Contactus@Caratlane.Com</li>
+              <li>Coraporate: B2B@Caratlane.Com</li>
+              <li>HR: Careers@Caratlane.Com</li>
+              <li>Grievance: Click Here</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          <i class="fa-brands fa-square-facebook social_logo"></i>
+          <i class="fa-brands fa-square-instagram social_logo"></i>
+          <i class="fa-brands fa-square-pinterest social_logo"></i>
+          <i class="fa-brands fa-square-twitter social_logo"></i>
+          <i class="fa-brands fa-linkedin social_logo"></i>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+  let form = document.getElementById("signUpform");
+
+  const onPayment = (e) => {
+    e.preventDefault();
+
+    let firstName = document.getElementById("first_name").value;
+    let lastName = document.getElementById("last_name").value;
+    let mobileNumber = document.getElementById("mobile_number").value;
+    let email = document.getElementById("email").value;
+    let address = document.getElementById("password").value;
+    let additionalInfo = document.getElementById("confirmpassword").value;
+    let delivery = document.querySelector(
+      "input[type=radio][name=gender]:checked"
+    ).value;
+    let cardNumber = document.getElementById("cardNumber");
+    let cvv = document.getElementById("cvv");
+
+    let paymentDetails = {
+      firstName,
+      lastName,
+      mobileNumber,
+      email,
+      additionalInfo,
+      delivery,
+      cardNumber,
+      cvv,
+    };
+    if (paymentDetails) {
+      alert("payment successful");
+      window.location.href = "./index.html";
+    }
+  };
+
+  form.addEventListener("submit", onPayment);
+</script>

@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#product_details_container {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.name {
+  font-size: 32px;
+  font-family: "BegumSemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #4f3267;
+  margin: 3px 0 0;
+  max-width: 100%;
+  font-weight: bold;
+}
+.price {
+  font-size: 28px;
+  font-family: "InterSemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #231535;
+  vertical-align: middle;
+  font-weight: 200;
+}
+.selectMetal {
+  width: 100%;
+  font-family: "MuliRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  outline: none;
+  padding-left: 16px;
+  height: 48px;
+  width: 188px;
+  border-radius: 12px;
+  border: 1px solid #ded6fb;
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #4f3267;
+  font-weight: bold;
+  font-size: 16px;
+}
+.selectSize {
+  width: 100%;
+  font-family: "MuliRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  outline: none;
+  padding-left: 16px;
+  height: 48px;
+  width: 188px;
+  border-radius: 12px;
+  border: 1px solid #ded6fb;
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #4f3267;
+  font-weight: bold;
+  font-size: 16px;
+}
+.select_container {
+  display: flex;
+  flex-direction: column;
+}
+.metal_heading {
+  height: 18px;
+  color: #33363e;
+  font-size: 14px;
+  font-family: "InterRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.size_heading {
+  height: 18px;
+  color: #33363e;
+  font-size: 14px;
+  font-family: "InterRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cartBtn {
+  border: none;
+  font-size: 18px;
+  width: 208px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #de57e5, #8863fb);
+  color: #ffffff;
+  font-family: "InterSemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left: 15px;
+  margin: 10px 0 3px 0;
+  padding: 16px 0 16px 0;
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./productDetails.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Product Details</title>
+  </head>
+  <body>
+    <nav>
+      <div class="top_nav"></div>
+      <div class="upper_nav_bar">
+        <div class="logo">
+          <img src="/logo.png" alt="" />
+        </div>
+        <div class="services">
+          <div>FREE TRY AT HOME</div>
+          <div>FIND STORE</div>
+          <div>PLAN OF PURCHASE</div>
+          <div>BUY DIGITAL GOLD</div>
+        </div>
+        <div class="search-container">
+          <input type="text" name="search" id="search" placeholder="search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="pincode">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>PINCODE</div>
+        </div>
+        <div class="signin_cart_container">
+          <div class="signIn">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        </div>
+      </div>
+      <div class="lower_nav_bar">
+        <ul>
+          <li>BEST SELLERS</li>
+          <li>NEW ARRIVALS</li>
+          <li>RINGS</li>
+          <li>EARRINGS</li>
+          <li>BRACELETS & BANGLES</li>
+          <li>SOLITAIRES</li>
+          <li>SPECIAL DEALS</li>
+          <li>OTHER JEWELLERY</li>
+          <li>GIFTING</li>
+        </ul>
+      </div>
+    </nav>
+    <div id="product_details_container"></div>
+    <footer>
+      <div class="footer_container">
+        <div class="footer_row1">
+          <div>
+            <ul>
+              <li class="heading">Know Your Jewellery</li>
+              <li>DIAMOND GUIDE</li>
+              <li>JEWELLERY GUIDE</li>
+              <li>GEMSTONES GUIDE</li>
+              <li>Gold Rate</li>
+              <li>Digital Gold</li>
+            </ul>
+          </div>
+
+          <div>
+            <ul>
+              <li class="heading">CaratLane Advantage</li>
+              <li>15-DAY RETURNS</li>
+              <li>FREE SHIPPING</li>
+              <li>FINANCING OPTIONS</li>
+              <li>Old Gold Exchange</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Customer Service</li>
+              <li>RETURN POLICY</li>
+              <li>ORDER STATUS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">About Us</li>
+              <li>OUR STORY</li>
+              <li>PRESS</li>
+              <li>BLOG</li>
+              <li>CAREERS</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li class="heading">Contact Us</li>
+              <li>
+                <ul class="communication_Icons">
+                  <li><i class="fa-solid fa-phone"></i></li>
+                  <li><i class="fa-solid fa-message"></i></li>
+                  <li><i class="fa-brands fa-square-whatsapp"></i></li>
+                </ul>
+              </li>
+              <li>24X7 Enquiry Support ( ALL Days )</li>
+              <li>General: Contactus@Caratlane.Com</li>
+              <li>Coraporate: B2B@Caratlane.Com</li>
+              <li>HR: Careers@Caratlane.Com</li>
+              <li>Grievance: Click Here</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          <i class="fa-brands fa-square-facebook social_logo"></i>
+          <i class="fa-brands fa-square-instagram social_logo"></i>
+          <i class="fa-brands fa-square-pinterest social_logo"></i>
+          <i class="fa-brands fa-square-twitter social_logo"></i>
+          <i class="fa-brands fa-linkedin social_logo"></i>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+  const id = window.location.search.split("=")[1];
+  fetch(`http://localhost:3300/product/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res.size);
+      displayProduct(res);
+    })
+    .catch((err) => console.log(err));
+
+  function addToCartAction(productId) {
+    fetch(`http://localhost:3300/cart/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        productId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          console.log(res.products);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  let product_container = document.getElementById("product_details_container");
+  function displayProduct(el) {
+    product_container.innerHTML = "";
+
+    let product_image = document.createElement("div");
+    product_image.setAttribute("class", "product_image");
+
+    let image = document.createElement("img");
+    image.setAttribute("src", el.image);
+    image.setAttribute("class", "image");
+
+    let product_details = document.createElement("div");
+    product_details.setAttribute("class", "product_details");
+
+    let name = document.createElement("p");
+    name.textContent = el.name;
+    name.setAttribute("class", "name");
+
+    let price = document.createElement("p");
+    price.textContent = `₹${el.price}`;
+    price.setAttribute("class", "price");
+
+    let select_container = document.createElement("div");
+    select_container.setAttribute("class", "select_container");
+
+    let metal_heading_select_container = document.createElement("div");
+    metal_heading_select_container.setAttribute(
+      "class",
+      "metal_heading_select_container"
+    );
+
+    let metal_heading = document.createElement("p");
+    metal_heading.textContent = "Choice of metal";
+    metal_heading.setAttribute("class", "metal_heading");
+
+    let selectMetal = document.createElement("select");
+    selectMetal.setAttribute("class", "selectMetal");
+
+    el.metal.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item;
+      option.textContent = item;
+      selectMetal.appendChild(option);
+    });
+
+    let size_heading_select_container = document.createElement("div");
+    size_heading_select_container.setAttribute(
+      "class",
+      "size_heading_select_container"
+    );
+
+    let size_heading = document.createElement("p");
+    size_heading.textContent = "Select Size";
+    size_heading.setAttribute("class", "size_heading");
+
+    let selectSize = document.createElement("select");
+    selectSize.setAttribute("class", "selectSize");
+
+    el.size.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item;
+      option.textContent = item;
+      selectSize.appendChild(option);
+    });
+
+    let addToCart = document.createElement("button");
+    addToCart.textContent = "ADD TO CART";
+    addToCart.setAttribute("class", "cartBtn");
+    addToCart.setAttribute("data-set", el._id);
+
+    addToCart.addEventListener("click", (e) => {
+      console.log(e.target.dataset.set);
+      const token = localStorage.getItem("token");
+      if (token) {
+        addToCartAction(e.target.dataset.set);
+        alert("Product added to cart");
+      } else {
+        window.location.href = "./signUp.html";
+      }
+    });
+
+    product_details.append(name, select_container, price, addToCart);
+    select_container.append(
+      size_heading_select_container,
+      metal_heading_select_container
+    );
+    size_heading_select_container.append(size_heading, selectSize);
+    metal_heading_select_container.append(metal_heading, selectMetal);
+    product_image.append(image);
+    product_container.append(product_image, product_details);
+  }
+
+  let cart = document.querySelector(".cart");
+  cart.addEventListener("click", () => {
+    window.location.href = "./cart.html";
+  });
+</script>

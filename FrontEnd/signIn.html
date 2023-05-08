@@ -17,7 +17,7 @@
       <div class="top_nav"></div>
       <div class="upper_nav_bar">
         <div class="logo">
-          <img src="./images/logo.png" alt="" />
+          <img src="/logo.png" alt="" />
         </div>
         <div class="services">
           <div>FREE TRY AT HOME</div>
@@ -170,6 +170,7 @@
         console.log(res);
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", res.user);
+        console.log(res.user.firstName);
         window.location.href = "./index.html";
       })
       .catch((err) => console.log(err));

@@ -68,6 +68,11 @@ input[type="checkbox"] {
   font-size: 14px;
   color: #9d9fa4;
 }
+.material {
+  font-family: "InterRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #9d9fa4;
+}
 .product_image {
   border-radius: 8px;
   border: 1px solid lightgray;

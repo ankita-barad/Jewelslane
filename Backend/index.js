@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { userRoute } = require("./routes/user.route");
 const { productRoute } = require("./routes/product.route");
+const { cartRoute } = require("./routes/cart.route");
 
 const { connection } = require("./db");
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/user", userRoute);
 app.use("/product", productRoute);
+app.use("/cart", cartRoute);
 
 app.listen(process.env.PORT, async () => {
   await connection;
