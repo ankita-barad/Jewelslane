@@ -1,6 +1,6 @@
 # frightened-van-975
 Deployed-Link
-https://clinquant-valkyrie-633f08.netlify.app/payment.html
+https://clinquant-valkyrie-633f08.netlify.app/
 
 1.Home Page
 ![image](https://github.com/ankita-barad/frightened-van-975/assets/121330309/3d1a99f8-120d-45e4-b83f-7875142366de)
