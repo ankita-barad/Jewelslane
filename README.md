@@ -4,9 +4,25 @@
 Jewelslane is an online jewelry store, taking inspiration from CaratLane. It offers a stunning range of valuable jewelry, aiming to provide a seamless and enjoyable shopping experience for jewelry lovers
 
 ## Tech stack
+* HTML
+* CSS
+* Javascript
+* Node JS
+* Express JS
+* Mongo DB
+* Mongoose
+* JWT
 
+## Features
+* Login/SignUp
+* Product Page
+* individual product page
+* Add product to cart
+* Authorization
 
-
+## Deployed Link
+* Frontend - https://clinquant-valkyrie-633f08.netlify.app/
+* Backend - https://jewelslane.onrender.com
 
 
 ## Screenshot
